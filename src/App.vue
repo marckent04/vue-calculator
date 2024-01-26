@@ -19,16 +19,31 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { Calculator } from "./calculator";
 import { Keyboard } from "./keyboard";
 
 const keyboard = new Keyboard();
-
 const calculator = ref(new Calculator());
 
+onMounted(() => {
+  window.addEventListener("keyup", (e) => {
+    let value = e.key;
+    if (e.key === "Enter") {
+      value = "=";
+    }
+
+    processValue(value);
+  });
+});
+
 function processValue(value) {
+  if (!keyboard.isvalidKey(value)) {
+    return;
+  }
+
   const specialKeys = ["c", "="];
+
   if (!specialKeys.includes(value)) {
     calculator.value.addEntry(value);
     return;
@@ -45,7 +60,7 @@ function processValue(value) {
 
 const currentDisplay = computed(() => {
   let calculation = calculator.value.getCalulation();
-  const result = calculation.replace(/\*/g, "x").replace(/\//g, "÷");
+  const result = calculation.replace(/\*/g, "×").replace(/\//g, "÷");
 
   if (Number.parseFloat(result) && result.length > 15) {
     return Number.parseFloat(result).toFixed(4);

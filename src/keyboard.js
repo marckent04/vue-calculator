@@ -21,4 +21,12 @@ export class Keyboard {
     ".",
     "=",
   ];
+
+  /**
+   * @param {String} value
+   * @returns {Boolean}
+   */
+  isvalidKey(value) {
+    return this.keys.filter((key) => key !== "").includes(value);
+  }
 }

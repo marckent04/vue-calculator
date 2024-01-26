@@ -87,6 +87,7 @@ export class Calculator {
    */
   calculate() {
     const result = eval(this.getCalulation());
+    this.clear();
     this.entries = [result.toString()];
     return result;
   }
