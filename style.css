@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "calculator";
+  src: url("/fonts/digital-7.ttf"); /* IE9 Compat Modes */
+  src: url("/fonts/digital-7.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: 400;
+  font-style: normal;
+}
