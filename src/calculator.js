@@ -76,9 +76,15 @@ export class Calculator {
       .slice(lastOperatorIndex + 1)
       .includes(".");
 
-    if (!isLastNumberContainsComma) {
-      this.entries.push(".");
+    if (
+      !this.getCalulation().length ||
+      this.isLastEntryIsOperator() ||
+      isLastNumberContainsComma
+    ) {
+      return;
     }
+
+    this.entries.push(".");
   }
 
   /**
